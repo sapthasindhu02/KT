@@ -10,9 +10,4 @@ export interface User {
     email: string
     name: string
   }
-  export interface UserData{
-    getName():string
-  }
-  export interface UserName{
-    setName():string
-  }
+  

@@ -4,9 +4,6 @@ import bodyParser from 'body-parser'
 import {RegisterRoutes} from './routes/routes'
 // controllers need to be referenced in order to get crawled by the generator
 import './controllers/usersControllers'
-import { myContainer } from "../inversify.config"
-import { TYPES } from "./types"
-import { UserData } from "./models/User"
 
 const app = express()
 app.use('/docs', express.static(__dirname + '/swagger-ui'))
@@ -15,9 +12,6 @@ app.use('/swagger.json', (req, res) => {
 })
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-
-const userObj=myContainer.get<UserData>(TYPES.Userdata);
-console.log(userObj.getName());
 
 RegisterRoutes(app)
 
