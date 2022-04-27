@@ -8,6 +8,7 @@
     "specVersion": 3
   },
   "routes": {
-    "routesDir": "src/routes"
+    "routesDir": "src/routes",
+    "iocModule":"inversify.config.ts"
   }
   }

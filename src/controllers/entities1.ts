@@ -1,12 +1,15 @@
 import { inject, injectable } from "inversify";
-import { UserData,UserName } from "../models/User";
+import  UserName,{ UserData } from "../models/User";//Named and default exports
 import { TYPES } from "../types";
 
 @injectable()
 export class FirstUser implements UserName{
-
-    public setName(): string {
-        return "John";
+    
+    public getName(): string {
+        return 'John';
+    }
+    public getMsg(): string {
+        return `Hi this is ${this.getName()}`;
     }
 }
 @injectable()
@@ -15,7 +18,7 @@ export class Users implements UserData{
     constructor(@inject(TYPES.Username) user1:UserName){
         this.user1=user1;
     }
-    public getName(): string {
-        return this.user1.setName();
+    public getInfo(): string {
+        return `Name:${this.user1.getName()}, Message:${this.user1.getMsg()} `;
     }
 }

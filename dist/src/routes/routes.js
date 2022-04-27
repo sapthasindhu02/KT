@@ -1,14 +1,24 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RegisterRoutes = void 0;
 /* tslint:disable */
 /* eslint-disable */
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-var runtime_1 = require("@tsoa/runtime");
+const runtime_1 = require("@tsoa/runtime");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-var usersControllers_1 = require("./../controllers/usersControllers");
+const usersControllers_1 = require("./../controllers/usersControllers");
+const inversify_config_1 = require("./../../inversify.config");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-var models = {
+const models = {
     "User": {
         "dataType": "refObject",
         "properties": {
@@ -21,6 +31,11 @@ var models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "UsersList": {
+        "dataType": "refAlias",
+        "type": { "dataType": "array", "array": { "dataType": "refObject", "ref": "User" }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "UserCreationRequest": {
         "dataType": "refObject",
         "properties": {
@@ -31,45 +46,78 @@ var models = {
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
-var validationService = new runtime_1.ValidationService(models);
+const validationService = new runtime_1.ValidationService(models);
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 function RegisterRoutes(app) {
     // ###########################################################################################################
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-    app.get('/Users/:id', function UsersController_getUser(request, response, next) {
-        var args = {
-            id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
-        };
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        var validatedArgs = [];
-        try {
-            validatedArgs = getValidatedArgs(args, request, response);
-            var controller = new usersControllers_1.UsersController();
-            var promise = controller.getUser.apply(controller, validatedArgs);
-            promiseHandler(controller, promise, response, undefined, next);
-        }
-        catch (err) {
-            return next(err);
-        }
+    app.get('/users/:id', function UsersController_getUserObj(request, response, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const args = {
+                id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+            };
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+            let validatedArgs = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+                const container = typeof inversify_config_1.iocContainer === 'function' ? inversify_config_1.iocContainer(request) : inversify_config_1.iocContainer;
+                const controller = yield container.get(usersControllers_1.UsersController);
+                if (typeof controller['setStatus'] === 'function') {
+                    controller.setStatus(undefined);
+                }
+                const promise = controller.getUserObj.apply(controller, validatedArgs);
+                promiseHandler(controller, promise, response, undefined, next);
+            }
+            catch (err) {
+                return next(err);
+            }
+        });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.post('/Users', function UsersController_createUser(request, response, next) {
-        var args = {
-            requestBody: { "in": "body", "name": "requestBody", "required": true, "ref": "UserCreationRequest" },
-        };
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        var validatedArgs = [];
-        try {
-            validatedArgs = getValidatedArgs(args, request, response);
-            var controller = new usersControllers_1.UsersController();
-            var promise = controller.createUser.apply(controller, validatedArgs);
-            promiseHandler(controller, promise, response, undefined, next);
-        }
-        catch (err) {
-            return next(err);
-        }
+    app.get('/users', function UsersController_getUsersList(request, response, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const args = {};
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+            let validatedArgs = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+                const container = typeof inversify_config_1.iocContainer === 'function' ? inversify_config_1.iocContainer(request) : inversify_config_1.iocContainer;
+                const controller = yield container.get(usersControllers_1.UsersController);
+                if (typeof controller['setStatus'] === 'function') {
+                    controller.setStatus(undefined);
+                }
+                const promise = controller.getUsersList.apply(controller, validatedArgs);
+                promiseHandler(controller, promise, response, undefined, next);
+            }
+            catch (err) {
+                return next(err);
+            }
+        });
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/users', function UsersController_createUser(request, response, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const args = {
+                requestBody: { "in": "body", "name": "requestBody", "required": true, "ref": "UserCreationRequest" },
+            };
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+            let validatedArgs = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+                const container = typeof inversify_config_1.iocContainer === 'function' ? inversify_config_1.iocContainer(request) : inversify_config_1.iocContainer;
+                const controller = yield container.get(usersControllers_1.UsersController);
+                if (typeof controller['setStatus'] === 'function') {
+                    controller.setStatus(undefined);
+                }
+                const promise = controller.createUser.apply(controller, validatedArgs);
+                promiseHandler(controller, promise, response, undefined, next);
+            }
+            catch (err) {
+                return next(err);
+            }
+        });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -79,9 +127,9 @@ function RegisterRoutes(app) {
     }
     function promiseHandler(controllerObj, promise, response, successStatus, next) {
         return Promise.resolve(promise)
-            .then(function (data) {
-            var statusCode = successStatus;
-            var headers;
+            .then((data) => {
+            let statusCode = successStatus;
+            let headers;
             if (isController(controllerObj)) {
                 headers = controllerObj.getHeaders();
                 statusCode = controllerObj.getStatus() || statusCode;
@@ -89,15 +137,14 @@ function RegisterRoutes(app) {
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
             returnHandler(response, statusCode, data, headers);
         })
-            .catch(function (error) { return next(error); });
+            .catch((error) => next(error));
     }
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    function returnHandler(response, statusCode, data, headers) {
-        if (headers === void 0) { headers = {}; }
+    function returnHandler(response, statusCode, data, headers = {}) {
         if (response.headersSent) {
             return;
         }
-        Object.keys(headers).forEach(function (name) {
+        Object.keys(headers).forEach((name) => {
             response.set(name, headers[name]);
         });
         if (data && typeof data.pipe === 'function' && data.readable && typeof data._read === 'function') {
@@ -119,9 +166,9 @@ function RegisterRoutes(app) {
     ;
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     function getValidatedArgs(args, request, response) {
-        var fieldErrors = {};
-        var values = Object.keys(args).map(function (key) {
-            var name = args[key].name;
+        const fieldErrors = {};
+        const values = Object.keys(args).map((key) => {
+            const name = args[key].name;
             switch (args[key].in) {
                 case 'request':
                     return request;

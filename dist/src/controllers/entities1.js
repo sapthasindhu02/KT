@@ -13,32 +13,31 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Users = exports.FirstUser = void 0;
-var inversify_1 = require("inversify");
-var types_1 = require("../types");
-var FirstUser = /** @class */ (function () {
-    function FirstUser() {
+const inversify_1 = require("inversify");
+const types_1 = require("../types");
+let FirstUser = class FirstUser {
+    getName() {
+        return 'John';
     }
-    FirstUser.prototype.setName = function () {
-        return "John";
-    };
-    FirstUser = __decorate([
-        (0, inversify_1.injectable)()
-    ], FirstUser);
-    return FirstUser;
-}());
+    getMsg() {
+        return `Hi this is ${this.getName()}`;
+    }
+};
+FirstUser = __decorate([
+    (0, inversify_1.injectable)()
+], FirstUser);
 exports.FirstUser = FirstUser;
-var Users = /** @class */ (function () {
-    function Users(user1) {
+let Users = class Users {
+    constructor(user1) {
         this.user1 = user1;
     }
-    Users.prototype.getName = function () {
-        return this.user1.setName();
-    };
-    Users = __decorate([
-        (0, inversify_1.injectable)(),
-        __param(0, (0, inversify_1.inject)(types_1.TYPES.Username)),
-        __metadata("design:paramtypes", [Object])
-    ], Users);
-    return Users;
-}());
+    getInfo() {
+        return `Name:${this.user1.getName()}, Message:${this.user1.getMsg()} `;
+    }
+};
+Users = __decorate([
+    (0, inversify_1.injectable)(),
+    __param(0, (0, inversify_1.inject)(types_1.TYPES.Username)),
+    __metadata("design:paramtypes", [Object])
+], Users);
 exports.Users = Users;

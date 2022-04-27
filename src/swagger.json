@@ -37,6 +37,12 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"UsersList": {
+				"items": {
+					"$ref": "#/components/schemas/User"
+				},
+				"type": "array"
+			},
 			"UserCreationRequest": {
 				"properties": {
 					"email": {
@@ -66,17 +72,15 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/Users/{id}": {
+		"/users/{id}": {
 			"get": {
-				"operationId": "GetUser",
+				"operationId": "GetUserObj",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/User"
-								}
+								"schema": {}
 							}
 						}
 					},
@@ -106,7 +110,24 @@
 				]
 			}
 		},
-		"/Users": {
+		"/users": {
+			"get": {
+				"operationId": "GetUsersList",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UsersList"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			},
 			"post": {
 				"operationId": "CreateUser",
 				"responses": {
