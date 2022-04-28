@@ -1,32 +1,16 @@
-import {
-  Get,
-  Post,
-  Route,
-  Body,
-  Response,
-  SuccessResponse,
-  Controller,
-} from "tsoa";
-import { UserService } from "../services/userService";
-import {
-  aa,
-  Interface2,
-  Interface1,
-  User,
-  UserCreationRequest,
-  UsersList,
-} from "../models/User";
+import { Get, Route, Response, Controller } from "tsoa";
+import { UserDetails } from "../models/User";
 import { inject, injectable } from "inversify";
 import { TYPES } from "../types";
 
 @Route("users")
 @injectable()
 export class UsersController extends Controller {
-  private userServiceObj?: Interface1;
+  private _userService: UserDetails;
 
-  constructor(@inject(TYPES.User_Service) userServiceObj?: Interface1) {
+  constructor(@inject(TYPES.User_Service) userService: UserDetails) {
     super();
-    this.userServiceObj = userServiceObj;
+    this._userService = userService;
   }
 
   /**
@@ -40,24 +24,10 @@ export class UsersController extends Controller {
   @Response(403, "Forbidden")
   @Get("{id}")
   public async getUserObj(id: number) {
-    console.log("hii");
-
-    return this.userServiceObj?.getUser(id);
-    //return await new UserService().get(id)
+    return this._userService.getUser(id);
   }
   @Get()
   public async getUsersList() {
-    console.log("hii");
-
-    return this.userServiceObj?.getUsersList();
-  }
-  @SuccessResponse("201", "Created") // Custom success response
-  @Post()
-  public async createUser(
-    @Body() requestBody: UserCreationRequest
-  ): Promise<void> {
-    new UserService().create(requestBody);
-    this.setStatus(201); // set return status 201
-    return Promise.resolve();
+    return this._userService.getUsersList();
   }
 }

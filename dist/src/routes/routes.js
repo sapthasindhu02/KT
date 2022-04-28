@@ -36,15 +36,6 @@ const models = {
         "type": { "dataType": "array", "array": { "dataType": "refObject", "ref": "User" }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserCreationRequest": {
-        "dataType": "refObject",
-        "properties": {
-            "email": { "dataType": "string", "required": true },
-            "name": { "dataType": "string", "required": true },
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new runtime_1.ValidationService(models);
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -89,29 +80,6 @@ function RegisterRoutes(app) {
                     controller.setStatus(undefined);
                 }
                 const promise = controller.getUsersList.apply(controller, validatedArgs);
-                promiseHandler(controller, promise, response, undefined, next);
-            }
-            catch (err) {
-                return next(err);
-            }
-        });
-    });
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.post('/users', function UsersController_createUser(request, response, next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const args = {
-                requestBody: { "in": "body", "name": "requestBody", "required": true, "ref": "UserCreationRequest" },
-            };
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-            let validatedArgs = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-                const container = typeof inversify_config_1.iocContainer === 'function' ? inversify_config_1.iocContainer(request) : inversify_config_1.iocContainer;
-                const controller = yield container.get(usersControllers_1.UsersController);
-                if (typeof controller['setStatus'] === 'function') {
-                    controller.setStatus(undefined);
-                }
-                const promise = controller.createUser.apply(controller, validatedArgs);
                 promiseHandler(controller, promise, response, undefined, next);
             }
             catch (err) {

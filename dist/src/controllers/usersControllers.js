@@ -23,37 +23,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const tsoa_1 = require("tsoa");
-const userService_1 = require("../services/userService");
 const inversify_1 = require("inversify");
 const types_1 = require("../types");
 let UsersController = class UsersController extends tsoa_1.Controller {
-    constructor(userServiceObj) {
+    constructor(userService) {
         super();
-        this.userServiceObj = userServiceObj;
+        this._userService = userService;
     }
     /**
      * this is get Users endpoint
      * @param id this is the user id
      **/
     getUserObj(id) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("hii");
-            return (_a = this.userServiceObj) === null || _a === void 0 ? void 0 : _a.getUser(id);
+            return this._userService.getUser(id);
         });
     }
     getUsersList() {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("hii");
-            return (_a = this.userServiceObj) === null || _a === void 0 ? void 0 : _a.getUsersList();
-        });
-    }
-    createUser(requestBody) {
-        return __awaiter(this, void 0, void 0, function* () {
-            new userService_1.UserService().create(requestBody);
-            this.setStatus(201); // set return status 201
-            return Promise.resolve();
+            return this._userService.getUsersList();
         });
     }
 };
@@ -73,15 +61,6 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getUsersList", null);
-__decorate([
-    (0, tsoa_1.SuccessResponse)("201", "Created") // Custom success response
-    ,
-    (0, tsoa_1.Post)(),
-    __param(0, (0, tsoa_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], UsersController.prototype, "createUser", null);
 UsersController = __decorate([
     (0, tsoa_1.Route)("users"),
     (0, inversify_1.injectable)(),

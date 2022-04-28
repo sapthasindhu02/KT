@@ -42,22 +42,6 @@
 					"$ref": "#/components/schemas/User"
 				},
 				"type": "array"
-			},
-			"UserCreationRequest": {
-				"properties": {
-					"email": {
-						"type": "string"
-					},
-					"name": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"email",
-					"name"
-				],
-				"type": "object",
-				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -127,26 +111,6 @@
 				},
 				"security": [],
 				"parameters": []
-			},
-			"post": {
-				"operationId": "CreateUser",
-				"responses": {
-					"201": {
-						"description": "Created"
-					}
-				},
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/UserCreationRequest"
-							}
-						}
-					}
-				}
 			}
 		}
 	},

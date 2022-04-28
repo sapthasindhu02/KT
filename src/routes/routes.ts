@@ -28,15 +28,6 @@ const models: TsoaRoute.Models = {
         "type": {"dataType":"array","array":{"dataType":"refObject","ref":"User"},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "UserCreationRequest": {
-        "dataType": "refObject",
-        "properties": {
-            "email": {"dataType":"string","required":true},
-            "name": {"dataType":"string","required":true},
-        },
-        "additionalProperties": false,
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new ValidationService(models);
 
@@ -96,34 +87,6 @@ export function RegisterRoutes(app: express.Router) {
 
 
               const promise = controller.getUsersList.apply(controller, validatedArgs as any);
-              promiseHandler(controller, promise, response, undefined, next);
-            } catch (err) {
-                return next(err);
-            }
-        });
-        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/users',
-
-            async function UsersController_createUser(request: any, response: any, next: any) {
-            const args = {
-                    requestBody: {"in":"body","name":"requestBody","required":true,"ref":"UserCreationRequest"},
-            };
-
-            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-
-            let validatedArgs: any[] = [];
-            try {
-                validatedArgs = getValidatedArgs(args, request, response);
-
-                const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
-
-                const controller: any = await container.get<UsersController>(UsersController);
-                if (typeof controller['setStatus'] === 'function') {
-                controller.setStatus(undefined);
-                }
-
-
-              const promise = controller.createUser.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

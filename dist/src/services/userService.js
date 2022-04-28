@@ -32,18 +32,6 @@ let UserService = class UserService {
             });
         });
     }
-    create(requestBody) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let user = {
-                id: 12345,
-                email: requestBody.email,
-                name: requestBody.name,
-                phoneNumbers: [],
-                status: "status",
-            };
-            return Promise.resolve(user);
-        });
-    }
 };
 UserService = __decorate([
     (0, inversify_1.injectable)()

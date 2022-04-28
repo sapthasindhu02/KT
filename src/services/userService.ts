@@ -1,15 +1,9 @@
-import {
-  User,
-  UsersList,
-  UserCreationRequest,
-  aa,
-  Interface1,
-} from "../models/User";
+import { UsersList, UserDetails } from "../models/User";
 import usersList from "../../db.json";
 import { injectable } from "inversify";
 
 @injectable()
-export class UserService implements Interface1 {
+export class UserService implements UserDetails {
   public getUser(id: number): any {
     return usersList.find((user) => user.id === id);
   }
@@ -17,15 +11,5 @@ export class UserService implements Interface1 {
     return new Promise<UsersList>((resolve, reject) => {
       resolve(usersList);
     });
-  }
-  public async create(requestBody: UserCreationRequest): Promise<User> {
-    let user: User = {
-      id: 12345,
-      email: requestBody.email,
-      name: requestBody.name,
-      phoneNumbers: [],
-      status: "status",
-    };
-    return Promise.resolve(user);
   }
 }
