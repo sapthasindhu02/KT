@@ -1,29 +1,12 @@
-let sum = function (a, b) {
-  return Number(a) + Number(b);
-};
-let tobe_Null = function () {
-  return null;
-};
-let someFunc = (obj) => {
-  return obj;
-};
-function multiply(a, b) {
-  return a * b;
-}
-function greetWorld(func) {
-  return func("world");
-}
-function doSomeWork(func, a, b) {
-  return Number(func(a, b)) + Number(1);
-}
-function returnNumber() {
-  return new Promise((resolve, reject) => {
-    resolve(2);
-  });
-}
-function testString(str) {
-  return str;
-}
+import {
+  testString,
+  returnNumber,
+  doSomeWork,
+  multiply,
+  someFunc,
+  sum,
+  tobe_Null,
+} from "../src/services/example";
 //tests
 describe("sample testing", () => {
   test("addition should return 3", () => {
@@ -49,9 +32,18 @@ describe("sample testing", () => {
   });
 
   test("example exception returns an error", () => {
-    if (multiply(2, 10) !== 20) {
-      throw new Error("the result should be 15");
+    let mul;
+    try {
+      mul = multiply("a", 1);
+    } catch (err) {
+      mul = err;
     }
+    expect(mul).toBeInstanceOf(Error);
+    expect(mul.message).toBeDefined();
+    expect(mul.message).toBe("parameters are invalid");
+    // if (multiply(2, 10) !== 20) {
+    //   throw new Error("the result should be 15");
+    // }
   });
 
   test("async example", async () => {
@@ -59,7 +51,7 @@ describe("sample testing", () => {
     expect(result).toBe(2);
   });
 
-  test("greetWorld calls the greeting function properly", () => {
+  test(" using mock function ", () => {
     const mockFn = jest.fn();
     mockFn.mockReturnValueOnce(2);
     const value = mockFn();
@@ -70,6 +62,7 @@ describe("sample testing", () => {
   test("should return 6", () => {
     const mockfn = jest.fn((x, y) => x + y);
     const result = doSomeWork(mockfn, 2, 3);
+    expect(mockfn.mock.calls[0]).toEqual([2, 3]);
     expect(result).toBe(6);
     expect(mockfn).toBeCalledWith(2, 3);
   });

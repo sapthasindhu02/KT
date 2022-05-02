@@ -1,0 +1,27 @@
+{
+  "roots": ["<rootDir>/"],
+  "transformIgnorePatterns": ["<rootDir>/node_modules/"],
+  "globals": {
+    "ts-jest": {
+      "tsconfig": "tsconfig.json"
+    }
+  },
+  "collectCoverage": false,
+  "collectCoverageFrom": ["<rootDir>/src/services/**/*.{js,jsx,ts,tsx}"],
+  "testEnvironment": "node",
+  "coverageDirectory": "./coverage",
+  "coverageReporters": ["json", "html", "text", "text-summary"],
+  "coverageThreshold": {
+    "global": {
+      "branches": 50,
+      "functions": 50,
+      "lines": 50,
+      "statements": 50
+    }
+  },
+  "verbose": false,
+  "testMatch": ["<rootDir>/**/*.(spec|test).{ts,tsx,js}"],
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  }
+}
