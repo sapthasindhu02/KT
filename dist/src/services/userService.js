@@ -14,21 +14,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
-const db_json_1 = __importDefault(require("../../db.json"));
 const inversify_1 = require("inversify");
+const db_1 = require("../../db");
 let UserService = class UserService {
     getUser(id) {
-        return db_json_1.default.find((user) => user.id === id);
+        return (0, db_1.UsersArray)().find((user) => user.id === id);
+        //return usersList.find((user) => user.id === id);
     }
     getUsersList() {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => {
-                resolve(db_json_1.default);
+                resolve((0, db_1.UsersArray)());
             });
         });
     }
